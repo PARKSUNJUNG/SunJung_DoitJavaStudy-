@@ -1,46 +1,41 @@
+
 package doitCoding_03;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
-public class doit_005_10986 {  // 백준에서 메모리 초과함
+public class doit_005_10986 {
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args){
+
+
+		Scanner sc = new Scanner(System.in);
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = sc.nextInt();
+		int M = sc.nextInt();
 		
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		int arr[] = new int[N+1];
+		int sum[] = new int[N+1];
+		int ans[] = new int[N+1]; // 나머지 배열
+		int num[] = new int[N+1]; 
+		int answer = 0;
 		
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		long arr[] = new long[N+1];
-		
-		st = new StringTokenizer(br.readLine());
-		for(int i=1; i<N+1; i++) {
-			arr[i] = Integer.parseInt(st.nextToken());
+		for(int i=1; i<N+1; i++) {			
+			arr[i] = sc.nextInt();
+			sum[i] = arr[i] + sum[i-1];
+			ans[i] = sum[i] % M;
+			
+			if(ans[i] == 0) answer++;	
+			
+			num[ans[i]]++;	
 		}
 		
-		long sum[][] = new long[N+1][N+1];
-		long num = 0;
-		for(int i=1; i<N+1; i++) {
-			for(int j=1; j<N+1; j++) {
-				if(i == j) {
-					sum[i][j] += arr[j];
-				} else {
-					sum[i][j] += arr[j]+ sum[i][j-1];
-				}
-				
-				if(i<=j) {
-					if((sum[i][j] % M)==0) {
-						num++;
-					} 
-				}
-			}
-		}
+		for(int i=0; i<M; i++) {
+			if(num[i]>1) {
+			answer += (num[i]*(num[i]-1))/2;
+
+			}}
 		
-		System.out.println(num);
+		System.out.println(answer);		
 
 	}	
 }
