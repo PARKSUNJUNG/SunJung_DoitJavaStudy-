@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class doit_006_2018 { // 시간 초과
+public class doit_006_2018 {
 
 	public static void main(String[] args) throws IOException {
 		
