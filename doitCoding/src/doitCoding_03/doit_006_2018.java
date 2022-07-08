@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class doit_006_2018 {
+public class doit_006_2018 { // 시간 초과
 
 	public static void main(String[] args) throws IOException {
 		
@@ -13,22 +13,29 @@ public class doit_006_2018 {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 				
 		int N = Integer.parseInt(st.nextToken());
-		int sum[] = new int[N+1];
-		int ans = 0;
+		int start = 1;
+		int end = 1;
+		int count = 1;
+		int sum = 1;
 		
-		for(int i=1; i< N+1 ; i++) {
-			sum[i] = sum[i-1] + i;
-		}
-		
-		for(int i=1; i<N+1; i++) {
-			for(int j=1; j<N+1; j++) {
-				if(j>i) {
-					if(sum[j] - sum[i-1] == N) ans++;
-				}
+		while(end != N) {
+			
+			if(sum == N) {
+				count++;
+				end++;
+				sum = sum + end;
+			} 
+			else if(sum > N) {
+				sum = sum - start;
+				start++;
 			}
+			else {
+				end++;
+				sum = sum + end;
+			} 
+			
 		}
 		
-		System.out.println(ans+1);
-		
+		System.out.println(count);
 	}	
 }
