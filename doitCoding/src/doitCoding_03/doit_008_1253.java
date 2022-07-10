@@ -3,55 +3,57 @@ package doitCoding_03;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class doit_008_1253 { // 시간 초과 // 테케는 맞아서 답인지 확신하지 못함
+public class doit_008_1253 { 
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
 		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		int N  = Integer.parseInt(st.nextToken());
+		long arr[] = new long[N];
 		
-		int N = Integer.parseInt(st.nextToken());
-		int arr[] = new int[N];
-		int num[] = new int[N];
-		int start = 0;
-		int end = 1;
-		int sum = 0;
-		int ans = 0;
-				
 		st = new StringTokenizer(br.readLine());
-		for(int i=0; i< N;i++) {
+		for(int i=0; i<N; i++) {
 			arr[i] = Integer.parseInt(st.nextToken());
 		}
 		
+		Arrays.sort(arr);
+
+
+		int ans = 0;
+		int find = 0;
 		
-		while(start != N-1) {
-			sum = 0;
-			for(int i=0; i<N; i++) {
-				sum = arr[start] + arr[end];
-				
-				if(sum == arr[i]){
-					if(num[i] > 0) {
-						num[i]++;
-					}
-					else {
-						num[i]++;
+		
+		for(find=0; find<N; find++) {
+			int start = 0;
+			int end = N-1;
+			
+			while(start<end) {
+				if(arr[start] + arr[end] == arr[find]) {
+					if(start != find && end != find) {
 						ans++;
 						break;
 					}
+					else if(start == find){
+						start++;
+					}
+					else if(end == find) {
+						end--;
+					}
+				} 
+				else if(arr[start] + arr[end] < arr[find]) {
+					start++;
+				}
+				else {
+					end--;
 				}
 			}
-			end++;
-			
-			if(end == N) {
-				start++;
-				end= start+1;
-			}			
 		}
 		
-		System.out.println(ans);
-
+		System.out.println(ans);		
 	}
 }
