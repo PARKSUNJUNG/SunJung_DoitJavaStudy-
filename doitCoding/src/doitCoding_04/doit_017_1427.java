@@ -1,4 +1,4 @@
-package dotiCoding04;
+package doitCoding_04;
 
 import java.util.Scanner;
 
