@@ -16,8 +16,7 @@ public class doit_024_2023 {
  			System.out.println(2);
  			System.out.println(3);
  			System.out.println(5);
- 			System.out.println(7);
- 			
+ 			System.out.println(7); 			
  		}
  		
  		DFS(2,1);
