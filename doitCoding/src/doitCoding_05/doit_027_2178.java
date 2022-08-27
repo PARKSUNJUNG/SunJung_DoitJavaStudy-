@@ -64,7 +64,6 @@ public class doit_027_2178 {
 	 					que.add(new int[] {x,y});
 	 				}
 	 			}
-	 			
 	 		}
  		}
  	}
