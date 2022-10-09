@@ -1,4 +1,4 @@
-package doitCoding_05;
+package doitCoding_06;
 
 import java.util.Scanner;
 
