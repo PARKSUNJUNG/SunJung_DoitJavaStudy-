@@ -3,26 +3,21 @@ package doitCoding_03;
 import java.util.Scanner;
 
 public class doit_001_11720 {
-
+	
 	public static void main(String[] args) {
+		// 숫자의 합 구하기
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		String number = sc.next();
 		
-		Scanner scanner = new Scanner(System.in);
+		char[] num = number.toCharArray();
+		int sum = 0;
 		
-		// 숫자의 개수 받기
-		int num = scanner.nextInt();
-		
-		// 공백 없이 주어진 N개의 숫자
-		String str = scanner.next();
-		
-		int sum = 0; 
-		
-		for(int i=0; i<str.length(); i++) {
-			
-			char ch= str.charAt(i);
-			sum += ch-'0';
+		for(int i=0; i<n; i++) {
+			sum += num[i] - '0';
 		}
 		
-		System.out.println(sum);
+		System.out.println(sum);		
 	}
-
+	
 }
