@@ -3,42 +3,30 @@ package doitCoding_03;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 
+// 방법 1 (투포인터 사용 x)
 public class doit_006_2018 {
-
+	
 	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int n = Integer.parseInt(br.readLine());
+		int ans=0;
 		
-		StringTokenizer st = new StringTokenizer(br.readLine());
+		int s = 1;
 		
-		int N = Integer.parseInt(st.nextToken());
-		
-		int start = 1; 
-		int end = 1;
-		int count = 1;
-		int sum = 1;
-		
-		while(end != N) {
-			if(sum == N) {
-				count++;
-				end++;
-				sum = sum + end;
+		for(int i=1; i<=n; i++) {
+			s=i;
+			int sum = 0;
+			while(sum<n) {
+				sum += s;
+				s++;
+				if(sum == n) ans++;
 			}
-			else if(sum < N) {
-				end++;
-				sum = sum + end;
-			}
-			else {
-				sum = sum-start;
-				start++;
-			}
-
 		}
 		
-		System.out.println(count);
-
-
-	}	
+		System.out.println(ans);
+		
+	}
+	
 }
