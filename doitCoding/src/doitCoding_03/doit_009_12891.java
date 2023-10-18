@@ -5,54 +5,102 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-// 풀이 1 - 시간초과
+// 풀이 2 - 정답 공부
 public class doit_009_12891 {
 	
-	public static void main(String[] args) throws IOException{
+	static int[] num; // 조건 배열
+	static int[] check; // 체크 배열
+	static int checkNum;
+	
+	public static void main(String[] args) throws IOException {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
 		int s = Integer.parseInt(st.nextToken());
 		int p = Integer.parseInt(st.nextToken());
+		char[] ch = br.readLine().toCharArray();
 		
 		st = new StringTokenizer(br.readLine());
-		String str = st.nextToken();
-		char[] ch = str.toCharArray();
-	
-		int[] num = new int[4];
-		int[] num2 = new int[4]; // 비교 배열
-		st = new StringTokenizer(br.readLine());
+		num = new int[4];
+		check = new int[4]; // 체크 배열
+		checkNum = 0; // 4가 되었을 때, 조건 충족
 		for(int i=0; i<4; i++) {
 			num[i] = Integer.parseInt(st.nextToken());
+			// 문자가 0이면 굳이 체크를 안해도 되므로 미리 걸러내기
+			if(num[i] == 0) checkNum++;
 		}
 		
-		int start = 0;
-		int end = start + (p-1);
 		int ans = 0;
 		
-		while(end < s){
-			for(int i=start; i<=end; i++) {
-				if(ch[i] == 'A') num2[0]++;
-				else if(ch[i] == 'C') num2[1]++;
-				else if(ch[i] == 'G') num2[2]++;
-				else num2[3]++;
-			}
+		// 초기 p 부분 처리
+		for(int i=0; i<p; i++) {
+			Add(ch[i]);
+		}
+		
+		if(checkNum == 4) ans++;
+		
+		for(int i=p; i<s; i++) {
+			int j=i-p;
+			Add(ch[i]);
+			Remove(ch[j]);
 			
-			if(num[0] <= num2[0] && num[1] <= num2[1] && num[2] <= num2[2] && num[3] <= num2[3]) {
-				ans++;
-				start++;
-				end++;
-				num2[0]=0; num[1]=0; num2[2]=0; num2[3]=0;
-			} else {
-				start++;
-				end++;
-				num2[0]=0; num[1]=0; num2[2]=0; num2[3]=0;
-			}
-			
+			if(checkNum == 4) ans++;
 		}
 		
 		System.out.println(ans);
+		br.close();	
+		
+	}
+	
+	// 새로 들어온 문자를 처리하는 함수 
+	private static void Add(char c) {
+		switch(c) {
+		case 'A':
+			check[0]++;
+			if(num[0] == check[0]) checkNum++;
+			break;
+			
+		case 'C':
+			check[1]++;
+			if(num[1] == check[1]) checkNum++;
+			break;
+			
+		case 'G':
+			check[2]++;
+			if(num[2] == check[2]) checkNum++;
+			break;
+			
+		case 'T':
+			check[3]++;
+			if(num[3] == check[3]) checkNum++;
+			break;
+		}
+	}
+	
+	// 기존 문자를 처리하는 함수 
+	private static void Remove(char c) {
+		switch(c) {
+		case 'A':			
+			if(num[0] == check[0]) checkNum--;
+			check[0]--;
+			break;
+			
+		case 'C':
+			if(num[1] == check[1]) checkNum--;
+			check[1]--;
+			break;
+			
+		case 'G':
+			if(num[2] == check[2]) checkNum--;
+			check[2]--;
+			break;
+			
+		case 'T':
+			if(num[3] == check[3]) checkNum--;
+			check[3]--;
+			break;
+		}
 	}
 		
 }
