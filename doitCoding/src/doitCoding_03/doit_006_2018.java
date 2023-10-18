@@ -1,32 +1,34 @@
 package doitCoding_03;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 
-// 방법 1 (투포인터 사용 x)
+// 방법 2 (투포인터 사용 o)
 public class doit_006_2018 {
 	
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
-		int ans=0;
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
 		
-		int s = 1;
+		int start = 1;
+		int end = 1;
+		int ans = 1;
+		int sum = 1;
 		
-		for(int i=1; i<=n; i++) {
-			s=i;
-			int sum = 0;
-			while(sum<n) {
-				sum += s;
-				s++;
-				if(sum == n) ans++;
+		while(end != n) {
+			if(sum == n) {
+				ans++;
+				end++;
+				sum = sum + end;
+			} else if(sum < n) {
+				end++;
+				sum = sum + end;
+			} else { // sum > n
+				sum = sum - start;
+				start++;
 			}
 		}
-		
 		System.out.println(ans);
-		
 	}
 	
 }
